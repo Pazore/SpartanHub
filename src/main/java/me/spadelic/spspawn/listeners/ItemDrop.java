@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Listeners;
+package me.spadelic.spspawn.listeners;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;
@@ -6,26 +6,26 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
-public class BlockPlace implements Listener {
+public class ItemDrop implements Listener {
 
     static SpartanHub plugin;
-    private boolean blockPlacingDisabled;
+    private boolean itemDropDisabled;
 
-    public BlockPlace(SpartanHub plugin) {
+    public ItemDrop(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
-        blockPlacingDisabled = config.getBoolean("block-place", false);
+        itemDropDisabled = config.getBoolean("item-drop", false);
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
-        if (blockPlacingDisabled) {
+    public void onDrop(PlayerDropItemEvent e) {
+        if (itemDropDisabled) {
             e.setCancelled(true);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-place-message")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-drop-message")));
         }
     }
 

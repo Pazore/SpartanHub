@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Listeners;
+package me.spadelic.spspawn.listeners;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;
@@ -6,26 +6,26 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 
-public class ItemPickup implements Listener {
+public class BlockBreak implements Listener {
 
     static SpartanHub plugin;
-    private boolean itemPickupDisabled;
+    private boolean blockBreakingDisabled;
 
-    public ItemPickup(SpartanHub plugin) {
+    public BlockBreak(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
-        itemPickupDisabled = config.getBoolean("item-pickup", false);
+        blockBreakingDisabled = config.getBoolean("block-break", false);
     }
 
     @EventHandler
-    public void onPickup(PlayerPickupItemEvent e) {
-        if (itemPickupDisabled) {
+    public void onBreak(BlockBreakEvent e){
+        if (blockBreakingDisabled) {
             e.setCancelled(true);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-pickup-message")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-break-message")));
         }
     }
 

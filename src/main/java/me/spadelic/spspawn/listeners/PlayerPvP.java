@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Listeners;
+package me.spadelic.spspawn.listeners;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;

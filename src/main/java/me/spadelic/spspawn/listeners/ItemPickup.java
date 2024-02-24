@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Listeners;
+package me.spadelic.spspawn.listeners;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;
@@ -6,26 +6,26 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
-public class ItemDrop implements Listener {
+public class ItemPickup implements Listener {
 
     static SpartanHub plugin;
-    private boolean itemDropDisabled;
+    private boolean itemPickupDisabled;
 
-    public ItemDrop(SpartanHub plugin) {
+    public ItemPickup(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
-        itemDropDisabled = config.getBoolean("item-drop", false);
+        itemPickupDisabled = config.getBoolean("item-pickup", false);
     }
 
     @EventHandler
-    public void onDrop(PlayerDropItemEvent e) {
-        if (itemDropDisabled) {
+    public void onPickup(PlayerPickupItemEvent e) {
+        if (itemPickupDisabled) {
             e.setCancelled(true);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-drop-message")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-pickup-message")));
         }
     }
 

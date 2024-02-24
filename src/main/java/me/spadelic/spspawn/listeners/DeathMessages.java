@@ -1,12 +1,10 @@
-package me.spadelic.spspawn.Listeners;
+package me.spadelic.spspawn.listeners;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-
-import java.util.List;
 
 public class DeathMessages implements Listener {
 
