@@ -12,11 +12,13 @@ public class BlockBreak implements Listener {
 
     static SpartanHub plugin;
     private boolean blockBreakingDisabled;
+    private boolean blockBreakingEnabled;
 
     public BlockBreak(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
         blockBreakingDisabled = config.getBoolean("block-break", false);
+        blockBreakingEnabled = config.getBoolean("block-break", true);
     }
 
     @EventHandler
@@ -27,7 +29,9 @@ public class BlockBreak implements Listener {
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-break-message")));
         } else {
-            e.setCancelled(true);
+            if (blockBreakingEnabled) {
+                e.setCancelled(true);
+            }
         }
     }
 }

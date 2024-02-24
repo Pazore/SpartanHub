@@ -12,11 +12,13 @@ public class BlockPlace implements Listener {
 
     static SpartanHub plugin;
     private boolean blockPlacingDisabled;
+    private boolean blockPlacingEnabled;
 
     public BlockPlace(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
         blockPlacingDisabled = config.getBoolean("block-place", false);
+        blockPlacingEnabled = config.getBoolean("block-place", true);
     }
 
     @EventHandler
@@ -27,7 +29,9 @@ public class BlockPlace implements Listener {
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-place-message")));
         } else {
-            e.setCancelled(true);
+            if (blockPlacingEnabled) {
+                e.setCancelled(true);
+            }
         }
     }
 

@@ -12,11 +12,13 @@ public class ItemDrop implements Listener {
 
     static SpartanHub plugin;
     private boolean itemDropDisabled;
+    private boolean itemDropEnabled;
 
     public ItemDrop(SpartanHub plugin) {
         this.plugin = plugin;
         FileConfiguration config = plugin.getConfig();
         itemDropDisabled = config.getBoolean("item-drop", false);
+        itemDropEnabled = config.getBoolean("item-drop", true);
     }
 
     @EventHandler
