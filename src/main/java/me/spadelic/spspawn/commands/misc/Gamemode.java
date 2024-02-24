@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class Gamemode implements CommandExecutor {
 
-    static SpartanHub plugin;
+    private final SpartanHub plugin;
 
     public Gamemode(SpartanHub plugin) {
         this.plugin = plugin;
@@ -18,52 +18,51 @@ public class Gamemode implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        //normal
-        String prefix = plugin.getConfig().getString("prefix");
-        String onlyPlayers = plugin.getConfig().getString("only-players");
-        String noPermission = plugin.getConfig().getString("no-permission");
-        //game-modes
-        String creative = plugin.getConfig().getString("gamemode-creative");
-        String survival = plugin.getConfig().getString("gamemode-survival");
-        String adventure = plugin.getConfig().getString("gamemode-adventure");
-        String spectator = plugin.getConfig().getString("gamemode-spectator");
-
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + onlyPlayers));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("prefix") + plugin.getConfig().getString("only-players")));
             return true;
         }
 
         Player p = (Player) sender;
 
         if (!p.hasPermission("spartanhub.gamemode")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + noPermission));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("prefix") + plugin.getConfig().getString("no-permission")));
             return true;
         } else {
 
-            if (p.performCommand("gmc")) {
-                p.setGameMode(GameMode.CREATIVE);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + creative));
+            if (args.length != 1) {
+                p.sendMessage(ChatColor.RED + "Error: /gm(c,s,a,sp)");
                 return true;
             }
 
-            if (p.performCommand("gms")) {
-                p.setGameMode(GameMode.SURVIVAL);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + survival));
-                return true;
+            GameMode mode;
+            String modeString = args[0].toLowerCase();
+            String prefix = plugin.getConfig().getString("prefix");
+            String messageKey = "gamemode-" + modeString;
+
+            switch (modeString) {
+                case "gmc":
+                    mode = GameMode.CREATIVE;
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString(messageKey)));
+                    break;
+                case "gms":
+                    mode = GameMode.SURVIVAL;
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString(messageKey)));
+                    break;
+                case "gma":
+                    mode = GameMode.ADVENTURE;
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString(messageKey)));
+                    break;
+                case "gmsp":
+                    mode = GameMode.SPECTATOR;
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString(messageKey)));
+                    break;
+                default:
+                    p.sendMessage(ChatColor.RED + "Invalid gamemode! Usage: /gamemode <gmc|gmsp|gms|gma>");
+                    return true;
             }
 
-            if (p.performCommand("gma")) {
-                p.setGameMode(GameMode.ADVENTURE);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + adventure));
-                return true;
-            }
-
-            if (p.performCommand("gmsp")) {
-                p.setGameMode(GameMode.SPECTATOR);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + spectator));
-                return true;
-            }
-
+            p.setGameMode(mode);
             return true;
         }
     }

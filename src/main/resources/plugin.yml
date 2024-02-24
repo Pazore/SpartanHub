@@ -21,6 +21,8 @@ commands:
     aliases:
       - shub
 
-  gm:
+  gamemode:
     description: Changes your gamemode
     usage: /<command>
+    aliases:
+      - gm
