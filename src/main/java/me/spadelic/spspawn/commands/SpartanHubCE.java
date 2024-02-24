@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.commands.commands;
+package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.help.AliasCommand;
 import me.spadelic.spspawn.help.HelpCommand;
