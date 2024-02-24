@@ -27,6 +27,8 @@ public class PlayerPvP implements Listener {
                 String prefix = plugin.getConfig().getString("prefix");
                 Player p = (Player) e.getEntity();
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("pvp-message")));
+            } else {
+                e.setCancelled(true);
             }
         }
     }

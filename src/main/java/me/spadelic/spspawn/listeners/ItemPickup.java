@@ -26,6 +26,8 @@ public class ItemPickup implements Listener {
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-pickup-message")));
+        } else {
+            e.setCancelled(true);
         }
     }
 

@@ -26,6 +26,8 @@ public class BlockPlace implements Listener {
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-place-message")));
+        } else {
+            e.setCancelled(true);
         }
     }
 

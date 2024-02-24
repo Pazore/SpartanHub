@@ -21,6 +21,8 @@ public class MobSpawning implements Listener {
     public void onMobSpawn(CreatureSpawnEvent e) {
         if (mobSpawnDisabled) {
             e.setCancelled(false);
+        } else {
+            e.setCancelled(true);
         }
     }
 
