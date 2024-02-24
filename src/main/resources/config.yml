@@ -4,6 +4,15 @@ prefix: '&f&l(&bSpartanHub&f&l) &8• &7'
 
 only-players: '&cOnly players can use this command!'
 
+#Database
+
+database:
+  host: 'localhost'
+  port: 25565
+  name: 'your_database'
+  username: 'your_username'
+  password: 'your_password'
+
 #Set Spawn Messages
 
 spawn-location-message: '&aSpawn Location Has Been Set!'
@@ -27,6 +36,10 @@ no-spawn-location: '&cThere is no spawn location. &f&n/setspawn&r &cto set it.'
 spawn-timer: 0
 
 #Gift Messages!
+
+#Staff Chat
+entered-staffchat: '&7You have &a&lENTERED &7Staff Chat'
+left-staffchat: '&7You have &c&lLEFT &7Staff Chat'
 
 #Gamemodes
 gamemode-creative: '&7You have switched your game-mode to &a&lCREATIVE!'

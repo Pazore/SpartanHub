@@ -26,3 +26,9 @@ commands:
     usage: /<command>
     aliases:
       - gm
+
+  staffchat:
+    description: Staff Chat
+    usage: /<command>
+    aliases:
+      - sc
