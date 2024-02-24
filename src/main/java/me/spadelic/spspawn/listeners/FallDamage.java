@@ -22,7 +22,7 @@ public class FallDamage implements Listener {
         if (fallDamageDisabled) {
                 EntityDamageEvent.DamageCause damageCause = e.getCause();
                 if (damageCause.equals(EntityDamageEvent.DamageCause.FALL)) {
-                    e.setCancelled(true);
+                    e.setCancelled(false);
                 }
             }
         }

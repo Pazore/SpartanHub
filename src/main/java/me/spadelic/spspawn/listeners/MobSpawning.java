@@ -20,7 +20,7 @@ public class MobSpawning implements Listener {
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e) {
         if (mobSpawnDisabled) {
-            e.setCancelled(true);
+            e.setCancelled(false);
         }
     }
 

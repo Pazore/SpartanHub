@@ -22,7 +22,7 @@ public class ItemPickup implements Listener {
     @EventHandler
     public void onPickup(PlayerPickupItemEvent e) {
         if (itemPickupDisabled) {
-            e.setCancelled(true);
+            e.setCancelled(false);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-pickup-message")));

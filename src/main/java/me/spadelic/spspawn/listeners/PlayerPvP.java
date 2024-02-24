@@ -23,7 +23,7 @@ public class PlayerPvP implements Listener {
     public void onPvP(EntityDamageByEntityEvent e) {
         if (onPvPDisabled) {
             if (e.getEntity() instanceof Player) {
-                e.setCancelled(true);
+                e.setCancelled(false);
                 String prefix = plugin.getConfig().getString("prefix");
                 Player p = (Player) e.getEntity();
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("pvp-message")));

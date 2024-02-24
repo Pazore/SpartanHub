@@ -22,7 +22,7 @@ public class BlockPlace implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent e){
         if (blockPlacingDisabled) {
-            e.setCancelled(true);
+            e.setCancelled(false);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-place-message")));

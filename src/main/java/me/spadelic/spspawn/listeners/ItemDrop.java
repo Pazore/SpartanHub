@@ -22,7 +22,7 @@ public class ItemDrop implements Listener {
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
         if (itemDropDisabled) {
-            e.setCancelled(true);
+            e.setCancelled(false);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-drop-message")));
