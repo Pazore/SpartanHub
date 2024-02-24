@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Commands.misc;
+package me.spadelic.spspawn.commands.misc;
 
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.ChatColor;

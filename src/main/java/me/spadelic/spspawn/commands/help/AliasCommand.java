@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.Commands.help;
+package me.spadelic.spspawn.commands.help;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
