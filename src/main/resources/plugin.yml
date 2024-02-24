@@ -1,0 +1,26 @@
+name: SpartanHub
+version: '1.3'
+main: me.spadelic.spspawn.SpartanHub
+api-version: '1.19'
+authors: [Mevune]
+description: The BEST Hub Plugin!
+commands:
+  setlobby:
+    description: Set Lobby!
+    usage: /spawn
+
+  spawn:
+    description: Sends player to server spawn!
+    usage: /spawn
+    aliases:
+      - lobby
+
+  spartanhub:
+    description: Reloads The Configuration
+    usage: /<command>
+    aliases:
+      - shub
+
+  gm:
+    description: Changes your gamemode
+    usage: /<command>

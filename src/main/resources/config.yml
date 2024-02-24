@@ -1,0 +1,71 @@
+#config
+
+prefix: '&f&l(&bSpartanHub&f&l) &8• &7'
+
+only-players: '&cOnly players can use this command!'
+
+#Set Spawn Messages
+
+spawn-location-message: '&aSpawn Location Has Been Set!'
+
+invalid-world: '&cInvalid world for spawn location'
+
+no-permission: '&cYou are not permitted to this command!'
+
+#Spawn Command Messages
+
+teleported-to-spawn: '&aYou Have Been Teleported To Spawn!'
+
+no-spawn-location: '&cThere is no spawn location. &f&n/setspawn&r &cto set it.'
+
+#Misc
+
+# %player% shows the display name.
+# %username% shows the players normal username.
+
+#sets the amount of time you have to wait before teleported. Default is 0 which is automatic.
+spawn-timer: 0
+
+#Gift Messages!
+
+#Gamemodes
+gamemode-creative: '&7You have switched your game-mode to &a&lCREATIVE!'
+gamemode-survival: '&7You have switched your game-mode to &a&lSURVIVAL!'
+gamemode-adventure: '&7You have switched your game-mode to &a&lADVENTURE!'
+gamemode-spectator: '&7You have switched your game-mode to &a&lSPECTATOR!'
+
+#World Management
+block-break: false
+block-break-message: '&cYou cannot break blocks!'
+block-place: false
+block-place-message: '&cYou cannot place blocks here!'
+mob-spawning: false
+item-pickup: false
+item-pickup-message: '&cYou cannot pickup items here!'
+item-drop: false
+item-drop-message: '&cYou cannot drop items here!'
+pvp: false
+pvp-message: '&cYou cannot pvp here!'
+fall-damage: false
+
+
+#this makes it give the player a permanent SPEED II effect onJoin!
+apply-speed-effect: true
+
+join-motd:
+  - ''
+  - '&fWelcome Back %player%'
+  - ''
+
+join-message: '&e%player% has joined the game'
+leave-message: '&e%player% has left the game'
+#If you want a custom death message, then fill the ''!
+death-message: ''
+chat-locked: '&7The chat has been &c&lLOCKED &7by %player%'
+chat-unlocked: '&aThe chat has been &a&lUNLOCKED &7by %player%'
+
+#Spawn Coordinates
+spawn:
+  x:
+  y:
+  z:

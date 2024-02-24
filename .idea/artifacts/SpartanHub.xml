@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SpartanHub">
+    <output-path>$USER_HOME$/OneDrive/Desktop/Typlex Network/1.20 test/plugins</output-path>
+    <root id="archive" name="SpartanHub.jar" />
+  </artifact>
+</component>
