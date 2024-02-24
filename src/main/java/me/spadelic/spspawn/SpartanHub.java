@@ -5,6 +5,7 @@ import me.spadelic.spspawn.commands.SpartanHubCE;
 import me.spadelic.spspawn.commands.SpawnCommand;
 import me.spadelic.spspawn.commands.StaffChat;
 import me.spadelic.spspawn.listeners.*;
+import me.spadelic.spspawn.misc.Gamemode;
 import me.spadelic.spspawn.misc.JoinMessage;
 import me.spadelic.spspawn.utils.CC;
 import org.bukkit.command.CommandExecutor;
@@ -25,10 +26,13 @@ public final class SpartanHub extends JavaPlugin {
 
         staffChatEnabledPlayers = new HashSet<>();
 
+        SpartanHubCE spartanHubCE = new SpartanHubCE(this);
+
         getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));
+        getCommand("gamemode").setExecutor(new Gamemode(this));
 
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new JoinMessage(this), this);
