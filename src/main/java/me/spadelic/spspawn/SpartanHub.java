@@ -9,6 +9,8 @@ import me.spadelic.spspawn.listeners.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static java.awt.SystemColor.info;
+
 public final class SpartanHub extends JavaPlugin {
 
     @Override
