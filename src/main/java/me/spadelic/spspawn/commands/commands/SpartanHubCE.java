@@ -1,7 +1,7 @@
-package me.spadelic.spspawn.commands.main;
+package me.spadelic.spspawn.commands.commands;
 
-import me.spadelic.spspawn.commands.help.AliasCommand;
-import me.spadelic.spspawn.commands.help.HelpCommand;
+import me.spadelic.spspawn.help.AliasCommand;
+import me.spadelic.spspawn.help.HelpCommand;
 import me.spadelic.spspawn.SpartanHub;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,7 +1,6 @@
-package me.spadelic.spspawn.commands.main;
+package me.spadelic.spspawn.commands.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.commands.utils.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;

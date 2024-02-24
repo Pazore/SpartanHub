@@ -1,10 +1,10 @@
 package me.spadelic.spspawn;
 
-import me.spadelic.spspawn.commands.misc.Gamemode;
-import me.spadelic.spspawn.commands.misc.JoinMessage;
-import me.spadelic.spspawn.commands.main.SetSpawn;
-import me.spadelic.spspawn.commands.main.SpartanHubCE;
-import me.spadelic.spspawn.commands.main.SpawnCommand;
+import me.spadelic.spspawn.misc.Gamemode;
+import me.spadelic.spspawn.misc.JoinMessage;
+import me.spadelic.spspawn.commands.commands.SetSpawn;
+import me.spadelic.spspawn.commands.commands.SpartanHubCE;
+import me.spadelic.spspawn.commands.commands.SpawnCommand;
 import me.spadelic.spspawn.listeners.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
