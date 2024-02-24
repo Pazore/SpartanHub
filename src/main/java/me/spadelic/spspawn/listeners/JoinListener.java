@@ -18,9 +18,10 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+        String motd = plugin.getConfig().getString("join-motd").replace("%player%", p.getDisplayName());
 
-        for(int i = 0; i < plugin.getConfig().getStringList("join-motd").size(); i++){
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("join-motd").get(i)));
+        for(int i = 0; i < plugin.getConfig().getStringList(motd).size(); i++){
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList(motd).get(i)));
         }
 
     }
