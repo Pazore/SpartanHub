@@ -32,3 +32,6 @@ commands:
     usage: /<command>
     aliases:
       - sc
+  report:
+    description: Reports players to staff!
+    usage: /<command>

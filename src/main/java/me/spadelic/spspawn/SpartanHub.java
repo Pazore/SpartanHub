@@ -1,9 +1,7 @@
 package me.spadelic.spspawn;
 
-import me.spadelic.spspawn.commands.SetSpawn;
-import me.spadelic.spspawn.commands.SpartanHubCE;
-import me.spadelic.spspawn.commands.SpawnCommand;
-import me.spadelic.spspawn.commands.StaffChat;
+import me.spadelic.spspawn.DataBase.DatabaseManager;
+import me.spadelic.spspawn.commands.*;
 import me.spadelic.spspawn.listeners.*;
 import me.spadelic.spspawn.misc.Gamemode;
 import me.spadelic.spspawn.misc.JoinMessage;
@@ -20,37 +18,46 @@ public final class SpartanHub extends JavaPlugin {
 
     private Set<UUID> staffChatEnabledPlayers;
 
+    private DatabaseManager databaseManager;
+
     @Override
     public void onEnable() {
         getLogger().info("SpartanHub Has Loaded");
 
         staffChatEnabledPlayers = new HashSet<>();
 
+        databaseManager = new DatabaseManager(this);
+        databaseManager.connect();
+
         SpartanHubCE spartanHubCE = new SpartanHubCE(this);
 
-        getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
+        getCommand("spartanhub").setExecutor(spartanHubCE);
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));
         getCommand("gamemode").setExecutor(new Gamemode(this));
+        getCommand("report").setExecutor(new Report(databaseManager));
 
-        getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new JoinMessage(this), this);
-        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
-        getServer().getPluginManager().registerEvents(new JoinEffectListener(this), this);
-        getServer().getPluginManager().registerEvents(new BlockBreak(this), this);
-        getServer().getPluginManager().registerEvents(new MobSpawning(this), this);
-        getServer().getPluginManager().registerEvents(new ItemPickup(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerPvP(this), this);
-        getServer().getPluginManager().registerEvents(new ItemDrop(this), this);
-        getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
-        getServer().getPluginManager().registerEvents(new FallDamage(this), this);
-        getServer().getPluginManager().registerEvents(new DeathMessages(this), this);
-
-
+        registerListener(new SpawnListener(this));
+        registerListener(new JoinMessage(this));
+        registerListener(new JoinListener(this));
+        registerListener(new JoinEffectListener(this));
+        registerListener(new BlockBreak(this));
+        registerListener(new MobSpawning(this));
+        registerListener(new ItemPickup(this));
+        registerListener(new PlayerPvP(this));
+        registerListener(new ItemDrop(this));
+        registerListener(new BlockPlace(this));
+        registerListener(new FallDamage(this));
+        registerListener(new DeathMessages(this));
     }
+
     private void registerListener(Listener listener) {
         getServer().getPluginManager().registerEvents(listener, this);
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
     }
 
     public Set<UUID> getStaffChatEnabledPlayers() {
