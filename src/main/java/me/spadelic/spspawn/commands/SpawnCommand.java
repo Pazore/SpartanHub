@@ -1,6 +1,7 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
+import me.spadelic.spspawn.utils.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -47,7 +48,7 @@ public class SpawnCommand implements TabExecutor {
 
             String prefix = plugin.getConfig().getString("prefix");
 
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("only-players")));
+            sender.sendMessage(CC.translate(prefix + plugin.getConfig().getString("only-players")));
         }
         return true;
     }
@@ -56,9 +57,9 @@ public class SpawnCommand implements TabExecutor {
 
         if (location != null) {
             p.teleport(location);
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("teleported-to-spawn")));
+            p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("teleported-to-spawn")));
         } else {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("no-spawn-location")));
+            p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("no-spawn-location")));
 
         }
     }
@@ -68,7 +69,7 @@ public class SpawnCommand implements TabExecutor {
         List<String> completions = new ArrayList<>();
 
         if (!(sender instanceof Player)){
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("only-players")));
+            sender.sendMessage(CC.translate(plugin.getConfig().getString("only-players")));
         }
 
         Player p = (Player) sender;

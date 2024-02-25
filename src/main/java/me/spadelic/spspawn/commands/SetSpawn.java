@@ -1,6 +1,7 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
+import me.spadelic.spspawn.utils.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -16,6 +17,7 @@ public class SetSpawn implements CommandExecutor {
         this.plugin = plugin;
     }
 
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -25,7 +27,7 @@ public class SetSpawn implements CommandExecutor {
             Player p = (Player) sender;
 
             if (!p.hasPermission("spartanhub.setspawn")) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission")));
+                p.sendMessage(CC.translate(plugin.getConfig().getString("no-permission")));
                 return true;
             } else {
 
@@ -36,13 +38,13 @@ public class SetSpawn implements CommandExecutor {
                     plugin.getConfig().set("spawn", location);
                     plugin.saveConfig();
 
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("spawn-location-message")));
+                    p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("spawn-location-message")));
                 } else {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("invalid-world")));
+                    p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("invalid-world")));
                 }
             }
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("only-players")));
+            sender.sendMessage(CC.translate(prefix + plugin.getConfig().getString("only-players")));
     }
         return true;
     }

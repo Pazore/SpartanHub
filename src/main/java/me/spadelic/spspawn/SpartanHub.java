@@ -1,6 +1,6 @@
 package me.spadelic.spspawn;
 
-import me.spadelic.spspawn.DataBase.DatabaseManager;
+//import me.spadelic.spspawn.DataBase.DatabaseManager;
 import me.spadelic.spspawn.commands.*;
 import me.spadelic.spspawn.listeners.*;
 import me.spadelic.spspawn.misc.Gamemode;
@@ -18,20 +18,20 @@ public final class SpartanHub extends JavaPlugin {
 
     private Set<UUID> staffChatEnabledPlayers;
 
-    private DatabaseManager databaseManager;
+//    private DatabaseManager databaseManager;
 
     @Override
     public void onEnable() {
         getLogger().info("SpartanHub Has Loaded");
 
         staffChatEnabledPlayers = new HashSet<>();
+//
+//        databaseManager = new DatabaseManager(this);
+//        databaseManager.connect();
 
-        databaseManager = new DatabaseManager(this);
-        databaseManager.connect();
+        //SpartanHubCE spartanHubCE = new SpartanHubCE(this);
 
-        SpartanHubCE spartanHubCE = new SpartanHubCE(this);
-
-        getCommand("spartanhub").setExecutor(spartanHubCE);
+        //getCommand("spartanhub").setExecutor(spartanHubCE);
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));
@@ -56,9 +56,9 @@ public final class SpartanHub extends JavaPlugin {
         getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    public DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
+//    public DatabaseManager getDatabaseManager() {
+//        return databaseManager;
+//    }
 
     public Set<UUID> getStaffChatEnabledPlayers() {
         return staffChatEnabledPlayers;
