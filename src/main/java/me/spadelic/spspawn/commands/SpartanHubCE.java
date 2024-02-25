@@ -35,13 +35,7 @@ public class SpartanHubCE implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("gift")) {
             return true;
         } else {
-            if (args[0].equalsIgnoreCase("setspawn")) {
-                return setSpawnCommand.onCommand(sender, command, label, args);
-            } else if (args[0].equalsIgnoreCase("spawn")) {
-                return spawnCommand.onCommand(sender, command, label, args);
-            } else {
-                return false;
-            }
         }
+        return false;
     }
 }

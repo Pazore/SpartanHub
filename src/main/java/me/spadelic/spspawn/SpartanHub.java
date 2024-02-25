@@ -31,7 +31,7 @@ public final class SpartanHub extends JavaPlugin {
 
         //SpartanHubCE spartanHubCE = new SpartanHubCE(this);
 
-        //getCommand("spartanhub").setExecutor(spartanHubCE);
+        getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));

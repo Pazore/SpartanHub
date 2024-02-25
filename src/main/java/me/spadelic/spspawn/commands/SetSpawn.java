@@ -28,7 +28,6 @@ public class SetSpawn implements CommandExecutor {
 
             if (!p.hasPermission("spartanhub.setspawn")) {
                 p.sendMessage(CC.translate(plugin.getConfig().getString("no-permission")));
-                return true;
             } else {
 
                 Location location = p.getLocation();

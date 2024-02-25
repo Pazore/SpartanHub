@@ -7,11 +7,11 @@ description: The BEST Hub Plugin!
 commands:
   setlobby:
     description: Set Lobby!
-    usage: /spawn
+    usage: /<command>
 
   spawn:
     description: Sends player to server spawn!
-    usage: /spawn
+    usage: /<command>
     aliases:
       - lobby
 
