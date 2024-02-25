@@ -35,3 +35,9 @@ commands:
   report:
     description: Reports players to staff!
     usage: /<command>
+
+  vanish:
+    description: Makes you invisible
+    usage: /<command>
+    aliases:
+      - v

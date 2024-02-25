@@ -1,5 +1,6 @@
 package me.spadelic.spspawn.commands;
 
+import me.spadelic.spspawn.utils.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -66,6 +67,6 @@ public class Report implements CommandExecutor, TabCompleter {
     }
 
     private void handleReport(Player reporter, Player reported, String reason) {
-        reporter.sendMessage("Your report has been submitted successfully.");
+        reporter.sendMessage(CC.translate("&aYou have submitted a report!"));
     }
 }

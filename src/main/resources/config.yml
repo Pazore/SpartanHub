@@ -35,11 +35,24 @@ no-spawn-location: '&cThere is no spawn location. &f&n/setspawn&r &cto set it.'
 #sets the amount of time you have to wait before teleported. Default is 0 which is automatic.
 spawn-timer: 0
 
+#Scoreboard
+scoreboard:
+  title: "&a&lSpartanHub"
+  lines:
+    - ""
+    - "Welcome!"
+    - ""
+
 #Gift Messages!
 
 #Staff Chat
 entered-staffchat: '&7You have &a&lENTERED &7Staff Chat'
 left-staffchat: '&7You have &c&lLEFT &7Staff Chat'
+
+#Vanish
+vanish-message: '&7You have &a&lVANISHED!'
+unvanish-message: '&7You have &c&lUNVANISHED!'
+vanish-suffix: ' &5[V]'
 
 #Gamemodes
 gamemode-creative: '&7You have switched your game-mode to &a&lCREATIVE!'

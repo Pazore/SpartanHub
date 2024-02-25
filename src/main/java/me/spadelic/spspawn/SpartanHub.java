@@ -10,6 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
+import sun.jvm.hotspot.debugger.win32.coff.DebugVC50SSSegName;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -29,7 +31,7 @@ public final class SpartanHub extends JavaPlugin {
 //        databaseManager = new DatabaseManager(this);
 //        databaseManager.connect();
 
-        //SpartanHubCE spartanHubCE = new SpartanHubCE(this);
+        SpartanHubCE spartanHubCE = new SpartanHubCE(this);
 
         getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
         getCommand("setlobby").setExecutor(new SetSpawn(this));
@@ -37,6 +39,7 @@ public final class SpartanHub extends JavaPlugin {
         getCommand("staffchat").setExecutor(new StaffChat(this));
         getCommand("gamemode").setExecutor(new Gamemode(this));
         getCommand("report").setExecutor(new Report());
+        getCommand("vanish").setExecutor(new VanishCommand(this));
 
         registerListener(new SpawnListener(this));
         registerListener(new JoinMessage(this));
