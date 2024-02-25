@@ -1,4 +1,4 @@
-/*package me.spadelic.spspawn.DataBase;
+package me.spadelic.spspawn.DataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,4 +53,4 @@ public class DatabaseManager {
     private Logger getLogger() {
         return plugin.getLogger();
     }
-}*/
+}
