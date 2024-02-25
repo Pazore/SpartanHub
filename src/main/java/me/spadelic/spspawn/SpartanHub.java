@@ -27,6 +27,9 @@ public final class SpartanHub extends JavaPlugin {
         getLogger().info("SpartanHub Has Loaded");
 
         staffChatEnabledPlayers = new HashSet<>();
+
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
 //
 //        databaseManager = new DatabaseManager(this);
 //        databaseManager.connect();
