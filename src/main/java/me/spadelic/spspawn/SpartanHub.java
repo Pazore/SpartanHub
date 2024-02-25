@@ -36,7 +36,7 @@ public final class SpartanHub extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));
         getCommand("gamemode").setExecutor(new Gamemode(this));
-        getCommand("report").setExecutor(new Report(databaseManager));
+        getCommand("report").setExecutor(new Report());
 
         registerListener(new SpawnListener(this));
         registerListener(new JoinMessage(this));

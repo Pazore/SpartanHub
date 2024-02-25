@@ -45,18 +45,6 @@ public class StaffChat implements CommandExecutor {
             message.append(arg).append(" ");
         }
 
-        try {
-            Connection connection = plugin.getDatabaseManager().getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO staff_chat (player_name, message) VALUES (?, ?)");
-            statement.setString(1, player.getName());
-            statement.setString(2, message.toString());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            player.sendMessage(CC.translate("&cAn error occurred while saving your message."));
-            return true;
-        }
-
         player.sendMessage(CC.translate("&aYour message has been sent to staff chat!"));
 
         return true;

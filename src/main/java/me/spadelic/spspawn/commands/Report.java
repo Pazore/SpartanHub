@@ -1,25 +1,18 @@
 package me.spadelic.spspawn.commands;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import me.spadelic.spspawn.DataBase.DatabaseManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 import java.util.List;
 import java.util.ArrayList;
-import org.bukkit.Bukkit;
 
 public class Report implements CommandExecutor, TabCompleter {
 
-    private final DatabaseManager databaseManager;
-
-    public Report(DatabaseManager databaseManager) {
-        this.databaseManager = databaseManager;
+    public Report() {
+        // Constructor, if needed
     }
 
     @Override
@@ -48,30 +41,9 @@ public class Report implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        StringBuilder reasonBuilder = new StringBuilder();
-        for (int i = 1; i < args.length; i++) {
-            reasonBuilder.append(args[i]).append(" ");
-        }
-        String reason = reasonBuilder.toString().trim();
+        String reason = buildReason(args);
 
-        Connection connection = databaseManager.getConnection();
-        if (connection != null) {
-            try {
-                String sql = "INSERT INTO reports (reporter, reported, reason) VALUES (?, ?, ?)";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, reporter.getUniqueId().toString());
-                statement.setString(2, reported.getUniqueId().toString());
-                statement.setString(3, reason);
-                statement.executeUpdate();
-                statement.close();
-                reporter.sendMessage("Your report has been submitted successfully.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                reporter.sendMessage("An error occurred while submitting your report.");
-            }
-        } else {
-            reporter.sendMessage("Failed to connect to the database.");
-        }
+        handleReport(reporter, reported, reason);
 
         return true;
     }
@@ -83,5 +55,17 @@ public class Report implements CommandExecutor, TabCompleter {
             completions.add(player.getName());
         }
         return completions;
+    }
+
+    private String buildReason(String[] args) {
+        StringBuilder reasonBuilder = new StringBuilder();
+        for (int i = 1; i < args.length; i++) {
+            reasonBuilder.append(args[i]).append(" ");
+        }
+        return reasonBuilder.toString().trim();
+    }
+
+    private void handleReport(Player reporter, Player reported, String reason) {
+        reporter.sendMessage("Your report has been submitted successfully.");
     }
 }
