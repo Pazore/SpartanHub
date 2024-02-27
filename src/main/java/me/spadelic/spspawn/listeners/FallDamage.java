@@ -17,7 +17,7 @@ public class FallDamage implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-        if (!plugin.getConfig().getBoolean("fall-damage")) {
+        if (!plugin.getConfig().getBoolean("fall-damage", false)) {
                 EntityDamageEvent.DamageCause damageCause = e.getCause();
                 if (damageCause.equals(EntityDamageEvent.DamageCause.FALL)) {
                     e.setCancelled(false);

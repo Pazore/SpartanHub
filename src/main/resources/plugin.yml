@@ -41,3 +41,10 @@ commands:
     usage: /<command>
     aliases:
       - v
+
+  freeze:
+    description: Freezes a player!
+    usage: /<command>
+    aliases:
+      - ss
+      - screenshare

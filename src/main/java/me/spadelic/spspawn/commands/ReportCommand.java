@@ -10,9 +10,9 @@ import org.bukkit.Bukkit;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Report implements CommandExecutor, TabCompleter {
+public class ReportCommand implements CommandExecutor, TabCompleter {
 
-    public Report() {
+    public ReportCommand() {
         // Constructor, if needed
     }
 

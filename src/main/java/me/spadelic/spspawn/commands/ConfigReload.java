@@ -6,9 +6,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class ConfigReload implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ConfigReload implements TabExecutor {
 
     static SpartanHub plugin;
 
@@ -41,4 +45,14 @@ public class ConfigReload implements CommandExecutor {
             return true;
         }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        List<String> completions = new ArrayList<>();
+
+
+        completions.add("reload");
+
+        return completions;
+    }
 }
+

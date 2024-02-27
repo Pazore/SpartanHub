@@ -2,6 +2,8 @@
 
 prefix: '&f&l(&bSpartanHub&f&l) &8• &7'
 
+staff-prefix: '&b[STAFF] '
+
 only-players: '&cOnly players can use this command!'
 
 #Database
@@ -53,6 +55,13 @@ left-staffchat: '&7You have &c&lLEFT &7Staff Chat'
 vanish-message: '&7You have &a&lVANISHED!'
 unvanish-message: '&7You have &c&lUNVANISHED!'
 vanish-suffix: ' &5[V]'
+
+#Freeze/Screenshare
+freeze-message:
+  - '&7You have been &c&lFROZEN!'
+  - '&7Join https://discord.gg/yourServer/'
+  - '&7You have 2 minutes!'
+  - '&cLogging out will result in a permanent ban!'
 
 #Gamemodes
 gamemode-creative: '&7You have switched your game-mode to &a&lCREATIVE!'

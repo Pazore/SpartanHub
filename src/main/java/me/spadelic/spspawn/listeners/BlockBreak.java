@@ -16,22 +16,22 @@ public class BlockBreak implements Listener {
 
     public BlockBreak(SpartanHub plugin) {
         this.plugin = plugin;
-        FileConfiguration config = plugin.getConfig();
-        blockBreakingDisabled = config.getBoolean("block-break", false);
-        blockBreakingEnabled = config.getBoolean("block-break", true);
+//        FileConfiguration config = plugin.getConfig();
+//        blockBreakingDisabled = config.getBoolean("block-break", false);
+//        blockBreakingEnabled = config.getBoolean("block-break", true);
     }
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
-        if (blockBreakingDisabled) {
-            e.setCancelled(false);
+        if (plugin.getConfig().getBoolean("block-break", false)){
+        e.setCancelled(false);
+            Player p = e.getPlayer();
+            String prefix = plugin.getConfig().getString("prefix");
+        } else {
+            e.setCancelled(true);
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("block-break-message")));
-        } else {
-            if (blockBreakingEnabled) {
-                e.setCancelled(true);
-            }
         }
     }
 }

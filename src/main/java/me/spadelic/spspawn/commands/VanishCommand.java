@@ -7,23 +7,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 
 public class VanishCommand implements CommandExecutor {
 
-    static SpartanHub plugin;
-
-    public VanishCommand(SpartanHub plugin) {
-        this.plugin = plugin;
-    }
+    private final SpartanHub plugin = SpartanHub.getPlugin();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String prefix = plugin.getConfig().getString("prefix");
+        String staffPrefix = plugin.getConfig().getString("staff-prefix");
         String vanish = plugin.getConfig().getString("vanish-message");
         String unvanish = plugin.getConfig().getString("unvanish-message");
         String vanishSuffix = plugin.getConfig().getString("vanish-suffix");
@@ -38,45 +30,31 @@ public class VanishCommand implements CommandExecutor {
         if (!p.hasPermission("spartanhub.vanish")) {
             p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("no-permission")));
             return true;
-        }
-
-        if (p.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
-            p.removePotionEffect(PotionEffectType.INVISIBILITY);
-            p.setDisplayName(p.getName());
-            for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
-                if (!onlinePlayer.equals(p)) {
-                    removeFromTabList(onlinePlayer, p);
-                }
-            }
-            p.sendMessage(CC.translate(prefix + unvanish));
         } else {
-            p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false));
-            p.setDisplayName(p.getName() + vanishSuffix);
-            for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
-                if (!onlinePlayer.equals(p)) {
-                    addToTabList(onlinePlayer, p);
+            if (!(plugin.vanished.contains(p))) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (!all.hasPermission("spartanhub.bypassvanish")) {
+                        all.hidePlayer(p);
+                    } else {
+                        all.sendMessage(CC.translate(staffPrefix + p.getDisplayName() + " &7has &a&lVANISHED"));
+                    }
                 }
+                plugin.vanished.add(p);
+                p.sendMessage(CC.translate(prefix + vanish));
+            } else {
+                for (Player all : Bukkit.getOnlinePlayers()){
+                    if (!all.hasPermission("spartanhub.bypassvanish")) {
+                        all.showPlayer(p);
+                    } else {
+                        all.sendMessage(CC.translate(staffPrefix + p.getDisplayName() + " &7has &c&lUNVANISHED"));
+                    }
+                }
+                plugin.vanished.remove(p);
+                p.sendMessage(CC.translate(prefix + unvanish));
+
             }
-            p.sendMessage(CC.translate(prefix + vanish));
-            addToTabList(p, p);
-        }
 
-        return true;
-    }
-
-    private void removeFromTabList(Player viewer, Player vanishedPlayer) {
-        Scoreboard scoreboard = viewer.getScoreboard();
-        Objective objective = scoreboard.getObjective(DisplaySlot.PLAYER_LIST);
-        if (objective != null) {
-            objective.getScore(vanishedPlayer.getName()).setScore(9999);
-        }
-    }
-
-    private void addToTabList(Player viewer, Player vanishedPlayer) {
-        Scoreboard scoreboard = viewer.getScoreboard();
-        Objective objective = scoreboard.getObjective(DisplaySlot.PLAYER_LIST);
-        if (objective != null) {
-            objective.getScore(vanishedPlayer.getName()).setScore(-1);
+            return true;
         }
     }
 }

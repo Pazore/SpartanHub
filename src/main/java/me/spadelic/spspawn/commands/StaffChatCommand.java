@@ -7,15 +7,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-public class StaffChat implements CommandExecutor {
+public class StaffChatCommand implements CommandExecutor {
 
     private final SpartanHub plugin;
 
-    public StaffChat(SpartanHub plugin) {
+    public StaffChatCommand(SpartanHub plugin) {
         this.plugin = plugin;
     }
 
@@ -45,7 +41,7 @@ public class StaffChat implements CommandExecutor {
             message.append(arg).append(" ");
         }
 
-        player.sendMessage(CC.translate("&aYour message has been sent to staff chat!"));
+        //player.sendMessage(CC.translate("&aYour message has been sent to staff chat!"));
 
         return true;
     }
