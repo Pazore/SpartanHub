@@ -63,6 +63,14 @@ freeze-message:
   - '&7You have 2 minutes!'
   - '&cLogging out will result in a permanent ban!'
 
+freeze-ban-message:
+  - '&7You have been permanently banned from &3&lYourServer'
+  - ''
+  - '&7Banned by &a&lCONSOLE'
+  - '&7Reason: &fLogging out while frozen!'
+  - ''
+  - '&7If you find this false, make an appeal @ https://www.yourserver.com/'
+
 #Gamemodes
 gamemode-creative: '&7You have switched your game-mode to &a&lCREATIVE!'
 gamemode-survival: '&7You have switched your game-mode to &a&lSURVIVAL!'

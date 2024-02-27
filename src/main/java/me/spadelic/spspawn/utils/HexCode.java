@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.utils;
+/*package me.spadelic.spspawn.utils;
 
 import org.bukkit.ChatColor;
 
@@ -27,4 +27,4 @@ public class HexCode {
         }
         return colorCodes[index];
     }
-}
+}*/

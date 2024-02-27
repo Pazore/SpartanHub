@@ -2,6 +2,7 @@ package me.spadelic.spspawn.DataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +49,17 @@ public class DatabaseManager {
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public void insertStaffChatMessage(String playerName, String message) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO staff_chat (player_name, message) VALUES (?, ?)");
+            statement.setString(1, playerName);
+            statement.setString(2, message);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            getLogger().severe("Failed to insert staff chat message into the database: " + e.getMessage());
+        }
     }
 
     private Logger getLogger() {

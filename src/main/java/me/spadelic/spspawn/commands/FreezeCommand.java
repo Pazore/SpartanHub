@@ -10,11 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FreezeCommand implements TabExecutor, Listener {
 
@@ -24,6 +22,7 @@ public class FreezeCommand implements TabExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String prefix = plugin.getConfig().getString("prefix");
+        String staffPrefix = plugin.getConfig().getString("staff-prefix");
 
         if (!(sender instanceof Player)) {
             sender.sendMessage(CC.translate(prefix + plugin.getConfig().getString("only-players")));
@@ -56,7 +55,7 @@ public class FreezeCommand implements TabExecutor, Listener {
         }
 
         frozenPlayers.put(target, true);
-        for(int i = 0; i < plugin.getConfig().getStringList("freeze-message").size(); i++){
+        for (int i = 0; i < plugin.getConfig().getStringList("freeze-message").size(); i++) {
             target.sendMessage(CC.translate(prefix + plugin.getConfig().getStringList("freeze-message").get(i)));
         }
         return true;
@@ -72,6 +71,26 @@ public class FreezeCommand implements TabExecutor, Listener {
         }
     }
 
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        String staffPrefix = plugin.getConfig().getString("staff-prefix");
+
+        if (frozenPlayers.containsKey(p)) {
+            if (p.hasPermission("spartanhub.admin")) {
+                Bukkit.broadcast(CC.translate(staffPrefix + " " + p.getDisplayName() + " &chas logged out while frozen!"), "spartanhub.admin");
+            }
+
+            String banMessage = "";
+            List<String> banMessages = plugin.getConfig().getStringList("freeze-ban-message");
+            for (int i = 0; i < banMessages.size(); i++) {
+                banMessage += banMessages.get(i);
+            }
+            banMessage = CC.translate(banMessage);
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "ban " + p.getName() + " " + banMessage);
+        }
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         List<String> completions = new ArrayList<>();
@@ -83,3 +102,4 @@ public class FreezeCommand implements TabExecutor, Listener {
         return completions;
     }
 }
+

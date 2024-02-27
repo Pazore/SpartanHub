@@ -1,6 +1,8 @@
 package me.spadelic.spspawn.commands;
 
+import me.spadelic.spspawn.SpartanHub;
 import me.spadelic.spspawn.utils.CC;
+import me.spadelic.spspawn.DataBase.DatabaseManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,15 +11,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
 import java.util.List;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ReportCommand implements CommandExecutor, TabCompleter {
 
-    public ReportCommand() {
-        // Constructor, if needed
+    private final SpartanHub plugin;
+    private final DatabaseManager databaseManager;
+
+    public ReportCommand(SpartanHub plugin, DatabaseManager databaseManager) {
+        this.plugin = plugin;
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String prefix = plugin.getConfig().getString("prefix");
+
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only players can use this command!");
             return true;
@@ -26,25 +37,33 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
         Player reporter = (Player) sender;
 
         if (!reporter.hasPermission("spartanhub.report")) {
-            reporter.sendMessage("You don't have permission to use this command!");
+            reporter.sendMessage(CC.translate(prefix + "&cYou don't have permission to use this command!"));
             return true;
         }
 
         if (args.length < 2) {
-            reporter.sendMessage("Usage: /report <player> <reason>");
+            reporter.sendMessage(CC.translate(prefix + "Usage: /report (player) (reason)"));
             return true;
         }
 
         Player reported = Bukkit.getPlayer(args[0]);
 
         if (reported == null || !reported.isOnline()) {
-            reporter.sendMessage("Player not found or not online.");
+            reporter.sendMessage(CC.translate(prefix + "&cPlayer not found or not online!"));
             return true;
         }
 
         String reason = buildReason(args);
 
         handleReport(reporter, reported, reason);
+
+        saveReportToDatabase(reporter, reported, reason);
+
+        for (Player staff : Bukkit.getOnlinePlayers()) {
+            if (staff.hasPermission("spartanhub.admin")) {
+                staff.sendMessage(prefix + " " + reporter.getName() + " &7has reported " + reported.getName() + " for " + reason);
+            }
+        }
 
         return true;
     }
@@ -67,6 +86,28 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
     }
 
     private void handleReport(Player reporter, Player reported, String reason) {
-        reporter.sendMessage(CC.translate("&aYou have submitted a report!"));
+        reporter.sendMessage(CC.translate("&aYou have reported " + reported.getName() + " for " + reason));
+    }
+
+    private void saveReportToDatabase(Player reporter, Player reported, String reason) {
+        Connection connection = databaseManager.getConnection();
+        if (connection != null) {
+            try {
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO reports (reporter, reported, reason) VALUES (?, ?, ?)");
+                statement.setString(1, reporter.getUniqueId().toString());
+                statement.setString(2, reported.getUniqueId().toString());
+                statement.setString(3, reason);
+                statement.executeUpdate();
+                statement.close();
+
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.hasPermission("spartanhub.admin")) {
+                        player.sendMessage(CC.translate(plugin.getConfig().getString("staff-prefix") + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ public final class SpartanHub extends JavaPlugin {
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-//
+
         databaseManager = new me.spadelic.spspawn.DataBase.DatabaseManager(this);
         databaseManager.connect();
 
@@ -44,9 +44,9 @@ public final class SpartanHub extends JavaPlugin {
         getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
-        getCommand("staffchat").setExecutor(new StaffChatCommand(this));
+        getCommand("staffchat").setExecutor(new StaffChatCommand(this, staffChatEnabledPlayers, databaseManager));
         getCommand("gamemode").setExecutor(new Gamemode(this));
-        getCommand("report").setExecutor(new ReportCommand());
+        getCommand("report").setExecutor(new ReportCommand(this, databaseManager));
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("freeze").setExecutor(new FreezeCommand());
 
@@ -74,15 +74,6 @@ public final class SpartanHub extends JavaPlugin {
 
     public Set<UUID> getStaffChatEnabledPlayers() {
         return staffChatEnabledPlayers;
-    }
-
-    public void sendStaffChatMessage(Player sender, String message) {
-        for (UUID playerId : staffChatEnabledPlayers) {
-            Player p = getServer().getPlayer(playerId);
-            if (p != null) {
-                p.sendMessage(CC.translate("&b[S] " + sender.getDisplayName() + "&f: &3" + message));
-            }
-        }
     }
 
     public static SpartanHub getPlugin() {
