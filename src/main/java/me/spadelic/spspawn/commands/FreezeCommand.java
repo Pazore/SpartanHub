@@ -88,6 +88,7 @@ public class FreezeCommand implements TabExecutor, Listener {
             }
             banMessage = CC.translate(banMessage);
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "ban " + p.getName() + " " + banMessage);
+            Bukkit.broadcast(CC.translate(staffPrefix + " " + p.getDisplayName() + " &cis now banned for &7Logging while frozen by &a&lCONSOLE!"), "spartanhub.admin");
         }
     }
 
