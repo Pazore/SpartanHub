@@ -100,9 +100,10 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
                 statement.executeUpdate();
                 statement.close();
 
+                String reportMessage = plugin.getConfig().getString("staff-prefix") + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason;
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (player.hasPermission("spartanhub.admin")) {
-                        player.sendMessage(CC.translate(plugin.getConfig().getString("staff-prefix") + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason));
+                        player.sendMessage(CC.translate(reportMessage));
                     }
                 }
             } catch (SQLException e) {
