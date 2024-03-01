@@ -15,18 +15,18 @@ public class ItemPickup implements Listener {
 
     public ItemPickup(SpartanHub plugin) {
         this.plugin = plugin;
-        FileConfiguration config = plugin.getConfig();
-        itemPickupDisabled = config.getBoolean("item-pickup", false);
+//        FileConfiguration config = plugin.getConfig();
+//        itemPickupDisabled = config.getBoolean("item-pickup", false);
     }
 
     @EventHandler
     public void onPickup(PlayerPickupItemEvent e) {
-        if (itemPickupDisabled) {
+        if (plugin.getConfig().getBoolean("item-pickup", false)){
             e.setCancelled(false);
+        } else {
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-pickup-message")));
-        } else {
             e.setCancelled(true);
         }
     }

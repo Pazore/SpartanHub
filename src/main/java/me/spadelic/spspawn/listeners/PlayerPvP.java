@@ -15,19 +15,19 @@ public class PlayerPvP implements Listener {
 
     public PlayerPvP(SpartanHub plugin) {
         this.plugin = plugin;
-        FileConfiguration config = plugin.getConfig();
-        onPvPDisabled = config.getBoolean("pvp", false);
+//        FileConfiguration config = plugin.getConfig();
+//        onPvPDisabled = config.getBoolean("pvp", false);
     }
 
     @EventHandler
     public void onPvP(EntityDamageByEntityEvent e) {
-        if (onPvPDisabled) {
-            if (e.getEntity() instanceof Player) {
+        if (plugin.getConfig().getBoolean("pvp", false)) {
+        if (e.getEntity() instanceof Player) {
                 e.setCancelled(false);
-                String prefix = plugin.getConfig().getString("prefix");
-                Player p = (Player) e.getEntity();
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("pvp-message")));
             } else {
+            String prefix = plugin.getConfig().getString("prefix");
+            Player p = (Player) e.getEntity();
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("pvp-message")));
                 e.setCancelled(true);
             }
         }

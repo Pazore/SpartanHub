@@ -62,6 +62,9 @@ public final class SpartanHub extends JavaPlugin {
         registerListener(new BlockPlace(this));
         registerListener(new FallDamage(this));
         registerListener(new DeathMessages(this));
+
+        new CC();
+
     }
 
     private void registerListener(Listener listener) {

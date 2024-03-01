@@ -16,19 +16,19 @@ public class ItemDrop implements Listener {
 
     public ItemDrop(SpartanHub plugin) {
         this.plugin = plugin;
-        FileConfiguration config = plugin.getConfig();
-        itemDropDisabled = config.getBoolean("item-drop", false);
-        itemDropEnabled = config.getBoolean("item-drop", true);
+//        FileConfiguration config = plugin.getConfig();
+//        itemDropDisabled = config.getBoolean("item-drop", false);
+//        itemDropEnabled = config.getBoolean("item-drop", true);
     }
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
-        if (itemDropDisabled) {
-            e.setCancelled(false);
+        if (plugin.getConfig().getBoolean("item-drop", false)){
+         e.setCancelled(false);
+        } else {
             Player p = e.getPlayer();
             String prefix = plugin.getConfig().getString("prefix");
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("item-drop-message")));
-        } else {
             e.setCancelled(true);
         }
     }

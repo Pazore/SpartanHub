@@ -13,13 +13,13 @@ public class MobSpawning implements Listener {
 
     public MobSpawning(SpartanHub plugin) {
         this.plugin = plugin;
-        FileConfiguration config = plugin.getConfig();
-        mobSpawnDisabled = config.getBoolean("mob-spawning", false);
+//        FileConfiguration config = plugin.getConfig();
+//        mobSpawnDisabled = config.getBoolean("mob-spawning", false);
     }
 
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e) {
-        if (mobSpawnDisabled) {
+        if (plugin.getConfig().getBoolean("mob-spawning", false)) {
             e.setCancelled(false);
         } else {
             e.setCancelled(true);
