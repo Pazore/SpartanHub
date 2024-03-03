@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.utils;
+/*package me.spadelic.spspawn.utils;
 
 import org.bukkit.ChatColor;
 
@@ -9,4 +9,4 @@ public class CC {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-}
+}*/

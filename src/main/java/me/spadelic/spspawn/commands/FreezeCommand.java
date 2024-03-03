@@ -1,8 +1,8 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.utils.CC;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -25,38 +25,38 @@ public class FreezeCommand implements TabExecutor, Listener {
         String staffPrefix = plugin.getConfig().getString("staff-prefix");
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(CC.translate(prefix + plugin.getConfig().getString("only-players")));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("only-players")));
             return true;
         }
 
         Player p = (Player) sender;
 
         if (!p.hasPermission("spartanhub.freeze")) {
-            p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("no-permission")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("no-permission")));
             return true;
         }
 
         if (args.length < 1) {
-            p.sendMessage(CC.translate(prefix + "&cError: /freeze (player)"));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cError: /freeze (player)"));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null || !target.isOnline()) {
-            p.sendMessage(CC.translate(prefix + "&cError: Player is not online!"));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cError: Player is not online!"));
             return true;
         }
 
         if (frozenPlayers.containsKey(target)) {
             frozenPlayers.remove(target);
-            target.sendMessage(CC.translate(prefix + "&aYou have been unfrozen!"));
+            target.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&aYou have been unfrozen!"));
             return true;
         }
 
         frozenPlayers.put(target, true);
         for (int i = 0; i < plugin.getConfig().getStringList("freeze-message").size(); i++) {
-            target.sendMessage(CC.translate(prefix + plugin.getConfig().getStringList("freeze-message").get(i)));
+            target.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getStringList("freeze-message").get(i)));
         }
         return true;
     }
@@ -67,7 +67,7 @@ public class FreezeCommand implements TabExecutor, Listener {
         String prefix = plugin.getConfig().getString("prefix");
         if (frozenPlayers.containsKey(p)) {
             e.setCancelled(true);
-            p.sendMessage(CC.translate(prefix + "&cYou cannot move until you have been unfrozen!"));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cYou cannot move until you have been unfrozen!"));
         }
     }
 
@@ -78,7 +78,7 @@ public class FreezeCommand implements TabExecutor, Listener {
 
         if (frozenPlayers.containsKey(p)) {
             if (p.hasPermission("spartanhub.admin")) {
-                Bukkit.broadcast(CC.translate(staffPrefix + " " + p.getDisplayName() + " &chas logged out while frozen!"), "spartanhub.admin");
+                Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', staffPrefix + " " + p.getDisplayName() + " &chas logged out while frozen!"), "spartanhub.admin");
             }
 
             String banMessage = "";
@@ -86,9 +86,9 @@ public class FreezeCommand implements TabExecutor, Listener {
             for (int i = 0; i < banMessages.size(); i++) {
                 banMessage += banMessages.get(i);
             }
-            banMessage = CC.translate(banMessage);
+            banMessage = ChatColor.translateAlternateColorCodes('&', banMessage);
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "ban " + p.getName() + " " + banMessage);
-            Bukkit.broadcast(CC.translate(staffPrefix + " " + p.getDisplayName() + " &cis now banned for &7Logging while frozen by &a&lCONSOLE!"), "spartanhub.admin");
+            Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', staffPrefix + " " + p.getDisplayName() + " &cis now banned for &7Logging while frozen by &a&lCONSOLE!"), "spartanhub.admin");
         }
     }
 

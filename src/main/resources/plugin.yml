@@ -48,3 +48,8 @@ commands:
     aliases:
       - ss
       - screenshare
+  lockchat:
+    description: Locks chat
+    usage: /<command>
+    aliases:
+      - lc

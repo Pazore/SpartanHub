@@ -1,8 +1,8 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.utils.CC;
 import me.spadelic.spspawn.DataBase.DatabaseManager;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,19 +37,19 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
         Player reporter = (Player) sender;
 
         if (!reporter.hasPermission("spartanhub.report")) {
-            reporter.sendMessage(CC.translate(prefix + "&cYou don't have permission to use this command!"));
+            reporter.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cYou don't have permission to use this command!"));
             return true;
         }
 
         if (args.length < 2) {
-            reporter.sendMessage(CC.translate(prefix + "Usage: /report (player) (reason)"));
+            reporter.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "Usage: /report (player) (reason)"));
             return true;
         }
 
         Player reported = Bukkit.getPlayer(args[0]);
 
         if (reported == null || !reported.isOnline()) {
-            reporter.sendMessage(CC.translate(prefix + "&cPlayer not found or not online!"));
+            reporter.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cPlayer not found or not online!"));
             return true;
         }
 
@@ -86,7 +86,7 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
     }
 
     private void handleReport(Player reporter, Player reported, String reason) {
-        reporter.sendMessage(CC.translate("&aYou have reported " + reported.getName() + " for " + reason));
+        reporter.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have reported " + reported.getName() + " for " + reason));
     }
 
     private void saveReportToDatabase(Player reporter, Player reported, String reason) {
@@ -100,10 +100,10 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
                 statement.executeUpdate();
                 statement.close();
 
-                String reportMessage = plugin.getConfig().getString("staff-prefix") + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason;
+                String reportMessage = plugin.getConfig().getString(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("staff-prefix")) + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason);
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (player.hasPermission("spartanhub.admin")) {
-                        player.sendMessage(CC.translate(reportMessage));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', reportMessage));
                     }
                 }
             } catch (SQLException e) {

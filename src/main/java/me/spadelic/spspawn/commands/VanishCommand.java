@@ -1,8 +1,8 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.utils.CC;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,14 +21,14 @@ public class VanishCommand implements CommandExecutor {
         String vanishSuffix = plugin.getConfig().getString("vanish-suffix");
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(CC.translate(prefix + plugin.getConfig().getString("only-players")));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("only-players")));
             return true;
         }
 
         Player p = (Player) sender;
 
         if (!p.hasPermission("spartanhub.vanish")) {
-            p.sendMessage(CC.translate(prefix + plugin.getConfig().getString("no-permission")));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("no-permission")));
             return true;
         } else {
             if (!(plugin.vanished.contains(p))) {
@@ -36,21 +36,21 @@ public class VanishCommand implements CommandExecutor {
                     if (!all.hasPermission("spartanhub.bypassvanish")) {
                         all.hidePlayer(p);
                     } else {
-                        all.sendMessage(CC.translate(staffPrefix + p.getDisplayName() + " &7has &a&lVANISHED"));
+                        all.sendMessage(ChatColor.translateAlternateColorCodes('&', staffPrefix + p.getDisplayName() + " &7has &a&lVANISHED"));
                     }
                 }
                 plugin.vanished.add(p);
-                p.sendMessage(CC.translate(prefix + vanish));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + vanish));
             } else {
                 for (Player all : Bukkit.getOnlinePlayers()){
                     if (!all.hasPermission("spartanhub.bypassvanish")) {
                         all.showPlayer(p);
                     } else {
-                        all.sendMessage(CC.translate(staffPrefix + p.getDisplayName() + " &7has &c&lUNVANISHED"));
+                        all.sendMessage(ChatColor.translateAlternateColorCodes('&', staffPrefix + p.getDisplayName() + " &7has &c&lUNVANISHED"));
                     }
                 }
                 plugin.vanished.remove(p);
-                p.sendMessage(CC.translate(prefix + unvanish));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + unvanish));
 
             }
 

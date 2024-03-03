@@ -1,7 +1,6 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.utils.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,14 +27,14 @@ public class ConfigReload implements TabExecutor {
             Player p = (Player) sender;
 
             if (!p.hasPermission("spartanhub.reload")) {
-                p.sendMessage(CC.translate(prefix + ChatColor.RED + "You are not permitted to this command!"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + ChatColor.RED + "You are not permitted to this command!"));
                 return true;
             } else {
 
                 if (args.length == 0) {
-                    p.sendMessage(CC.translate(prefix + ChatColor.RED + "Usage: /spartanhub reload."));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + ChatColor.RED + "Usage: /spartanhub reload."));
                 } else if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-                    p.sendMessage(CC.translate(prefix + ChatColor.GREEN + "SpartanHub reloaded!"));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + ChatColor.GREEN + "SpartanHub reloaded!"));
                     plugin.reloadConfig();
 
                 }

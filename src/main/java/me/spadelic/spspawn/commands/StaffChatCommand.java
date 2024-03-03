@@ -1,7 +1,7 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.utils.CC;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,17 +34,17 @@ public class StaffChatCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!player.hasPermission("spartanhub.staffchat")) {
-            player.sendMessage(CC.translate(prefix + plugin.getConfig().getString("no-permission")));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("no-permission")));
             return true;
         }
 
         if (args.length == 0) {
             if (staffChatEnabledPlayers.contains(player.getUniqueId())) {
                 staffChatEnabledPlayers.remove(player.getUniqueId());
-                player.sendMessage(CC.translate(prefix + plugin.getConfig().getString("left-staffchat")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("left-staffchat")));
             } else {
                 staffChatEnabledPlayers.add(player.getUniqueId());
-                player.sendMessage(CC.translate(prefix + plugin.getConfig().getString("entered-staffchat")));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("entered-staffchat")));
             }
             return true;
         }
@@ -54,7 +54,7 @@ public class StaffChatCommand implements CommandExecutor {
             message.append(arg).append(" ");
         }
 
-        String formattedMessage = CC.translate(plugin.getConfig().getString("staff-prefix")) + player.getName() + "&f: " + message.toString();
+        String formattedMessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("staff-prefix")) + player.getName() + "&f: " + message.toString();
         for (Player staff : plugin.getServer().getOnlinePlayers()) {
             if (staff.hasPermission("spartanhub.staffchat")) {
                 staff.sendMessage(formattedMessage);
