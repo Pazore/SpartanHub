@@ -1,7 +1,6 @@
 package me.spadelic.spspawn.commands;
 
 import me.spadelic.spspawn.SpartanHub;
-import me.spadelic.spspawn.DataBase.DatabaseManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,11 +17,11 @@ import java.sql.SQLException;
 public class ReportCommand implements CommandExecutor, TabCompleter {
 
     private final SpartanHub plugin;
-    private final DatabaseManager databaseManager;
+    //private final DatabaseManager databaseManager;
 
-    public ReportCommand(SpartanHub plugin, DatabaseManager databaseManager) {
+    public ReportCommand(SpartanHub plugin/*DatabaseManager databaseManager*/) {
         this.plugin = plugin;
-        this.databaseManager = databaseManager;
+        //this.databaseManager = databaseManager;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
 
         handleReport(reporter, reported, reason);
 
-        saveReportToDatabase(reporter, reported, reason);
+        //saveReportToDatabase(reporter, reported, reason);
 
         for (Player staff : Bukkit.getOnlinePlayers()) {
             if (staff.hasPermission("spartanhub.admin")) {
@@ -88,27 +87,28 @@ public class ReportCommand implements CommandExecutor, TabCompleter {
     private void handleReport(Player reporter, Player reported, String reason) {
         reporter.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou have reported " + reported.getName() + " for " + reason));
     }
-
-    private void saveReportToDatabase(Player reporter, Player reported, String reason) {
-        Connection connection = databaseManager.getConnection();
-        if (connection != null) {
-            try {
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO reports (reporter, reported, reason) VALUES (?, ?, ?)");
-                statement.setString(1, reporter.getUniqueId().toString());
-                statement.setString(2, reported.getUniqueId().toString());
-                statement.setString(3, reason);
-                statement.executeUpdate();
-                statement.close();
-
-                String reportMessage = plugin.getConfig().getString(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("staff-prefix")) + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason);
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (player.hasPermission("spartanhub.admin")) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', reportMessage));
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
+
+//    private void saveReportToDatabase(Player reporter, Player reported, String reason) {
+//        Connection connection = databaseManager.getConnection();
+//        if (connection != null) {
+//            try {
+//                PreparedStatement statement = connection.prepareStatement("INSERT INTO reports (reporter, reported, reason) VALUES (?, ?, ?)");
+//                statement.setString(1, reporter.getUniqueId().toString());
+//                statement.setString(2, reported.getUniqueId().toString());
+//                statement.setString(3, reason);
+//                statement.executeUpdate();
+//                statement.close();
+//
+//                String reportMessage = plugin.getConfig().getString(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("staff-prefix")) + reporter.getDisplayName() + " has reported " + reported.getDisplayName() + " for " + reason);
+//                for (Player player : Bukkit.getOnlinePlayers()) {
+//                    if (player.hasPermission("spartanhub.admin")) {
+//                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', reportMessage));
+//                    }
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//}

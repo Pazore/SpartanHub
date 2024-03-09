@@ -1,11 +1,12 @@
 package me.spadelic.spspawn;
 
-import me.spadelic.spspawn.DataBase.DatabaseManager;
+//import me.spadelic.spspawn.DataBase.DatabaseManager;
 import me.spadelic.spspawn.commands.*;
 import me.spadelic.spspawn.listeners.*;
 import me.spadelic.spspawn.misc.Gamemode;
 import me.spadelic.spspawn.misc.JoinMessage;
 import me.spadelic.spspawn.misc.LockChat;
+import me.spadelic.spspawn.misc.SB;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
@@ -19,7 +20,7 @@ public final class SpartanHub extends JavaPlugin {
 
     private Set<UUID> staffChatEnabledPlayers;
 
-    private me.spadelic.spspawn.DataBase.DatabaseManager databaseManager;
+//    private me.spadelic.spspawn.DataBase.DatabaseManager databaseManager;
 
     public static ArrayList<Player> vanished = new ArrayList<>();
 
@@ -36,20 +37,21 @@ public final class SpartanHub extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        databaseManager = new me.spadelic.spspawn.DataBase.DatabaseManager(this);
-        databaseManager.connect();
+//        databaseManager = new me.spadelic.spspawn.DataBase.DatabaseManager(this);
+//        databaseManager.connect();
 
         SpartanHubCE spartanHubCE = new SpartanHubCE(this);
 
         getCommand("spartanhub").setExecutor(new SpartanHubCE(this));
         getCommand("setlobby").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
-        getCommand("staffchat").setExecutor(new StaffChatCommand(this, staffChatEnabledPlayers, databaseManager));
+//        getCommand("staffchat").setExecutor(new StaffChatCommand(this, staffChatEnabledPlayers, databaseManager));
         getCommand("gamemode").setExecutor(new Gamemode(this));
-        getCommand("report").setExecutor(new ReportCommand(this, databaseManager));
+//        getCommand("report").setExecutor(new ReportCommand(this, databaseManager));
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("freeze").setExecutor(new FreezeCommand());
         getCommand("lockchat").setExecutor(new LockChat(this));
+        getCommand("fly").setExecutor(new FlyCommand());
 
         registerListener(new SpawnListener(this));
         registerListener(new JoinMessage(this));
@@ -63,6 +65,8 @@ public final class SpartanHub extends JavaPlugin {
         registerListener(new BlockPlace(this));
         registerListener(new FallDamage(this));
         registerListener(new DeathMessages(this));
+        
+        new SB(getConfig());
 
     }
 
@@ -70,9 +74,9 @@ public final class SpartanHub extends JavaPlugin {
         getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    public me.spadelic.spspawn.DataBase.DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
+//    public me.spadelic.spspawn.DataBase.DatabaseManager getDatabaseManager() {
+//        return databaseManager;
+//    }
 
     public Set<UUID> getStaffChatEnabledPlayers() {
         return staffChatEnabledPlayers;

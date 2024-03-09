@@ -45,7 +45,11 @@ scoreboard:
     - "Welcome!"
     - ""
 
-#Gift Messages!
+#Flight Messages
+fly-toggled: '&7You have toggled &aFLIGHT'
+fly-untoggled: '&7You have untoggled &cFLIGHT'
+fly-others-toggled: '&7You have been enabled flight by %vault_prefix%%player_name%'
+fly-others-untoggled: '&7You have been disabled flight by %vault_prefix%%player_name%'
 
 #Staff Chat
 entered-staffchat: '&7You have &a&lENTERED &7Staff Chat'

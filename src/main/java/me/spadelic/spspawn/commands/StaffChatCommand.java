@@ -14,12 +14,12 @@ public class StaffChatCommand implements CommandExecutor {
 
     private final SpartanHub plugin;
     private final Set<UUID> staffChatEnabledPlayers;
-    private final me.spadelic.spspawn.DataBase.DatabaseManager databaseManager;
+//    private final me.spadelic.spspawn.DataBase.DatabaseManager databaseManager;
 
-    public StaffChatCommand(SpartanHub plugin, Set<UUID> staffChatEnabledPlayers, me.spadelic.spspawn.DataBase.DatabaseManager databaseManager) {
+    public StaffChatCommand(SpartanHub plugin, Set<UUID> staffChatEnabledPlayers) {
         this.plugin = plugin;
         this.staffChatEnabledPlayers = staffChatEnabledPlayers;
-        this.databaseManager = databaseManager;
+        //this.databaseManager = databaseManager;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class StaffChatCommand implements CommandExecutor {
             }
         }
 
-        databaseManager.insertStaffChatMessage(player.getName(), message.toString());
+        //databaseManager.insertStaffChatMessage(player.getName(), message.toString());
 
         return true;
     }

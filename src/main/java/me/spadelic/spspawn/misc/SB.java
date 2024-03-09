@@ -1,4 +1,4 @@
-/*package me.spadelic.spspawn.misc;
+package me.spadelic.spspawn.misc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -25,7 +25,7 @@ public class SB {
         String criteria = "dummy";
         String displayName = scoreboardConfig.getString("title", "&a&lSpartanHub");
 
-        objective = scoreboard.registerNewObjective(objectiveName, "dummy", String.valueOf(displayName));
+        objective = scoreboard.registerNewObjective(objectiveName, "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         List<String> lines = scoreboardConfig.getStringList("lines");
@@ -43,4 +43,4 @@ public class SB {
     public void setScore(Player player) {
         player.setScoreboard(scoreboard);
     }
-}*/
+}

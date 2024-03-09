@@ -1,4 +1,4 @@
-package me.spadelic.spspawn.DataBase;
+package me.spadelic.spspawn.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
