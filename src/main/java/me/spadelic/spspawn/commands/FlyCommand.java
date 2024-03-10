@@ -14,7 +14,6 @@ import java.util.List;
 public class FlyCommand implements TabExecutor {
 
     private ArrayList<Player> flyingPlayers = new ArrayList<>();
-
     SpartanHub plugin = SpartanHub.getPlugin();
 
     @Override
@@ -50,13 +49,13 @@ public class FlyCommand implements TabExecutor {
                 return true;
             }
             Player t = Bukkit.getPlayer(args[0]);
-            if (flyingPlayers.contains(p)) {
+            if (flyingPlayers.contains(t)) {
                 flyingPlayers.remove(t);
                 t.setAllowFlight(false);
                 t.sendMessage(CC.translate(prefix + plugin.getConfig().getString("fly-others-untoggled")));
                 p.sendMessage(CC.translate(prefix + "&aYou have disabled flight for %vault_prefix%%player_name%"));
             } else {
-                flyingPlayers.add(p);
+                flyingPlayers.add(t);
                 t.setAllowFlight(true);
                 t.sendMessage(CC.translate(prefix + plugin.getConfig().getString("fly-others-toggled")));
                 p.sendMessage(CC.translate(prefix + "&aYou have enabled flight for %vault_prefix%%player_name%"));
